@@ -1,0 +1,61 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: example.com
+    Specs:
+      - Hostname: orderer
+        SANS:
+          - "localhost"
+          - "127.0.0.1"
+
+PeerOrgs:
+  - Name: Supplier
+    Domain: supplier.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: Manufacturer
+    Domain: manufacturer.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+  - Name: Carrier
+    Domain: carrier.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+
+  - Name: Retailer
+    Domain: retailer.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1
+
+
+  - Name: Customer
+    Domain: customer.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - "localhost"
+    Users:
+      Count: 1

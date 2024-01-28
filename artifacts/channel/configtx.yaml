@@ -1,0 +1,275 @@
+Organizations:
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: crypto-config/ordererOrganizations/example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Writers:
+                Type: Signature
+                Rule: "OR('OrdererMSP.member')"
+            Admins:
+                Type: Signature
+                Rule: "OR('OrdererMSP.admin')"
+
+    - &Supplier
+        Name: SupplierMSP
+        ID: SupplierMSP
+        MSPDir: crypto-config/peerOrganizations/supplier.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('SupplierMSP.admin', 'SupplierMSP.client', 'SupplierMSP.peer')"
+            Writers:
+                Type: Signature
+                Rule: "OR('SupplierMSP.admin', 'SupplierMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('SupplierMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('SupplierMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.supplier.example.com
+              Port: 7051
+
+    - &Manufacturer
+        Name: ManufacturerMSP
+        ID: ManufacturerMSP
+        MSPDir: crypto-config/peerOrganizations/manufacturer.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('ManufacturerMSP.admin', 'ManufacturerMSP.client', 'ManufacturerMSP.peer')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ManufacturerMSP.admin', 'ManufacturerMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ManufacturerMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('ManufacturerMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.manufacturer.example.com
+              Port: 8051
+
+    - &Carrier
+        Name: CarrierMSP
+        ID: CarrierMSP
+        MSPDir: crypto-config/peerOrganizations/carrier.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('CarrierMSP.admin', 'CarrierMSP.client', 'CarrierMSP.peer')"
+            Writers:
+                Type: Signature
+                Rule: "OR('CarrierMSP.admin', 'CarrierMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('CarrierMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('CarrierMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.carrier.example.com
+              Port: 9051
+
+    - &Retailer
+        Name: RetailerMSP
+        ID: RetailerMSP
+        MSPDir: crypto-config/peerOrganizations/retailer.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('RetailerMSP.admin', 'RetailerMSP.client', 'RetailerMSP.peer')"
+            Writers:
+                Type: Signature
+                Rule: "OR('RetailerMSP.admin', 'RetailerMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('RetailerMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('RetailerMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.retailer.example.com
+              Port: 10051
+
+    - &Customer
+        Name: CustomerMSP
+        ID: CustomerMSP
+        MSPDir: crypto-config/peerOrganizations/customer.example.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('CustomerMSP.admin', 'CustomerMSP.client', 'CustomerMSP.peer')"
+            Writers:
+                Type: Signature
+                Rule: "OR('CustomerMSP.admin', 'CustomerMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('CustomerMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('CustomerMSP.peer')"
+        AnchorPeers:
+            - Host: peer0.customer.example.com
+              Port: 11051
+
+Capabilities:
+    Channel: &ChannelCapabilities
+        V2_0: true
+    Orderer: &OrdererCapabilities
+        V2_0: true
+    Application: &ApplicationCapabilities
+        V2_0: true
+
+Application: &ApplicationDefaults
+    Organizations:
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        LifecycleEndorsement:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Endorsement"
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Endorsement"
+    Capabilities:
+        <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+
+    OrdererType: etcdraft
+
+    EtcdRaft:
+        Consenters:
+        - Host: orderer.example.com
+          Port: 7050
+          ClientTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+          ServerTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+
+    Addresses:
+        - orderer.example.com:7050
+
+    # Batch Timeout: The amount of time to wait before creating a batch
+    BatchTimeout: 2s
+
+    # Batch Size: Controls the number of messages batched into a block
+    BatchSize:
+
+        # Max Message Count: The maximum number of messages to permit in a batch
+        MaxMessageCount: 10
+
+        # Absolute Max Bytes: The absolute maximum number of bytes allowed for
+        # the serialized messages in a batch.
+        AbsoluteMaxBytes: 99 MB
+
+        # Preferred Max Bytes: The preferred maximum number of bytes allowed for
+        # the serialized messages in a batch. A message larger than the preferred
+        # max bytes will result in a batch larger than preferred max bytes.
+        PreferredMaxBytes: 512 KB
+    Organizations:
+
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        # BlockValidation specifies what signatures must be included in the block
+        # from the orderer for the peer to validate it.
+        BlockValidation:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+
+################################################################################
+#
+#   CHANNEL
+#
+#   This section defines the values to encode into a config transaction or
+#   genesis block for channel related parameters.
+#
+################################################################################
+Channel: &ChannelDefaults
+    # Policies defines the set of policies at this level of the config tree
+    # For Channel policies, their canonical path is
+    #   /Channel/<PolicyName>
+    Policies:
+        # Who may invoke the 'Deliver' API
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        # Who may invoke the 'Broadcast' API
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        # By default, who may modify elements at this config level
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+
+    # Capabilities describes the channel level capabilities, see the
+    # dedicated Capabilities section elsewhere in this file for a full
+    # description
+    Capabilities:
+        <<: *ChannelCapabilities
+
+Profiles:
+    OrdererGenesis:
+        <<: *ChannelDefaults
+        Capabilities:
+            <<: *ChannelCapabilities
+        Orderer:
+            <<: *OrdererDefaults
+            OrdererType: etcdraft
+            EtcdRaft:
+                Consenters:
+                - Host: orderer.example.com
+                  Port: 7050
+                  ClientTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+                  ServerTLSCert: crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+            Addresses:
+                - orderer.example.com:7050
+
+            Organizations:
+                - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                - *Supplier
+                - *Manufacturer
+                - *Carrier
+                - *Retailer
+                - *Customer
+
+    BasicChannel:
+        Consortium: SampleConsortium
+        <<: *ChannelDefaults
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Supplier
+                - *Manufacturer
+                - *Carrier
+                - *Retailer
+                - *Customer
+            Capabilities:
+                <<: *ApplicationCapabilities
+
