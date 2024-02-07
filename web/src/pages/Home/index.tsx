@@ -9,6 +9,7 @@ const { Search } = Input;
 interface productResponseItemProps {
   ProductId: string,
   Name: string,
+  Supplier: string,
   Manufacturer: string,
   Distributor: string,
   Retailer: string,
