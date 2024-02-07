@@ -56,28 +56,35 @@ const Home: React.FC = () => {
       setItem((prev: any) => getUniqueListBy([...(prev || []), {
         color: 'green',
         label: data.Position[0]?.Date,
-        children: `Product was manufactured at ${data.Position[0]?.Organization}`
+        children: `Product was supplied at ${data.Position[0]?.Organization}`
       }], "color"))
     }
     if (data.Position[1]?.Date) {
       setItem((prev: any) => getUniqueListBy([...(prev || []), {
-        color: 'yellow',
+        color: 'red',
         label: data.Position[1]?.Date,
-        children: `Product was transfered to ${data.Position[1]?.Organization}`
+        children: `Product was manufactured at ${data.Position[1]?.Organization}`
       }], "color"))
     }
     if (data.Position[2]?.Date) {
       setItem((prev: any) => getUniqueListBy([...(prev || []), {
-        color: 'blue',
+        color: 'yellow',
         label: data.Position[2]?.Date,
         children: `Product was transfered to ${data.Position[2]?.Organization}`
       }], "color"))
     }
     if (data.Position[3]?.Date) {
       setItem((prev: any) => getUniqueListBy([...(prev || []), {
-        color: 'gray',
+        color: 'blue',
         label: data.Position[3]?.Date,
-        children: `Product was sold at ${data.Position[2]?.Organization}`
+        children: `Product was delivered to ${data.Position[3]?.Organization}`
+      }], "color"))
+    }
+    if (data.Position[4]?.Date) {
+      setItem((prev: any) => getUniqueListBy([...(prev || []), {
+        color: 'gray',
+        label: data.Position[4]?.Date,
+        children: `Product was sold at ${data.Position[3]?.Organization}`
       }], "color"))
     }
   }

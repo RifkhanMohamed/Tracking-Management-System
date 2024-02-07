@@ -11,6 +11,7 @@ const { Content, Footer } = Layout;
 interface productResponseItemProps {
   ProductId: string,
   Name: string,
+  Supplier: string,
   Manufacturer: string,
   Distributor: string,
   Retailer: string,
@@ -56,13 +57,14 @@ const DeliverConfirmation: React.FC = () => {
 
   const columns: ColumnsType<productResponseItemProps> = [
     { title: 'ProductId', dataIndex: 'ProductId', key: 'ProductId' },
-    { title: 'Name', dataIndex: 'Name', key: 'ProductId' },
-    { title: 'Manufacturer', dataIndex: 'Manufacturer', key: 'ProductId' },
-    { title: 'Distributor', dataIndex: 'Distributor', key: 'ProductId' },
-    { title: 'Retailer', dataIndex: 'Retailer', key: 'ProductId' },
-    { title: 'Customer', dataIndex: 'Consumer', key: 'ProductId' },
-    { title: 'Status', dataIndex: 'Status', key: 'ProductId' },
-    { title: 'Price', dataIndex: 'Price', key: 'ProductId' },
+    { title: 'Name', dataIndex: 'Name', key: 'Name' },
+    { title: 'Supplier', dataIndex: 'Supplier', key: 'Supplier' },
+    { title: 'Manufacturer', dataIndex: 'Manufacturer', key: 'Manufacturer' },
+    { title: 'Distributor', dataIndex: 'Distributor', key: 'Distributor' },
+    { title: 'Retailer', dataIndex: 'Retailer', key: 'Retailer' },
+    { title: 'Customer', dataIndex: 'Consumer', key: 'Consumer' },
+    { title: 'Status', dataIndex: 'Status', key: 'Status' },
+    { title: 'Price', dataIndex: 'Price', key: 'Price' },
   ];
 
 
@@ -101,7 +103,7 @@ const DeliverConfirmation: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!utils.token || utils.token.Organization !== "DistributorOrg") {
+    if (!utils.token || utils.token.Organization !== "CarrierOrg") {
       navigate("/login")
     } else {
       queryAllProduct();
