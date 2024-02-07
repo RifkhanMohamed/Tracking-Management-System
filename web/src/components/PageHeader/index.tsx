@@ -29,6 +29,9 @@ const PageHeader = () => {
     }
 
     const handleUserView = () => {
+        if (utils.token.Organization === "SupplierOrg") {
+            navigate('/supplier-management')
+        }
         if (utils.token.Organization === "ManufacturerOrg") {
             navigate("/product-management")
         }

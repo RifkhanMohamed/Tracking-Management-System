@@ -11,6 +11,7 @@ import ProductManagement from './pages/Product Management';
 import App from './App';
 import ProductConfirmation from './pages/ProductConfirmation';
 import SalerConfirmation from './pages/SalerConfirmation';
+import SupplierManagement from './pages/Supplier Management';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login></Login>
+  },
+  {
+    path: "/supplier-management",
+    element: <SupplierManagement></SupplierManagement>
   },
   {
     path: "/product-management",

@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
   const queryProduct = (productId: string) => {
     setProductResponse(null)
-    fetch(`https://customer.ducnghiapham.online/query?channelid=supplychain&chaincodeid=supplychain&function=queryProduct&args=${productId}`, {
+    fetch(`http://localhost:3004/query?channelid=mychannel&chaincodeid=supplychain&function=queryProduct&args=${productId}`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -123,7 +123,7 @@ const Home: React.FC = () => {
           )
         }
       </Content>
-      <Footer style={{ textAlign: 'center' }}>SupChain ©2023 Created by DucNghiaPham</Footer>
+      <Footer style={{ textAlign: 'center' }}>SupplyChain ©2024 Created by Rifkhan</Footer>
     </Layout>
   );
 };

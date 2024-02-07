@@ -12,19 +12,24 @@ const Login: React.FC = () => {
 
     const onFinish = (values: any) => {
         utils.handleLogin(values.username, values.password)
+        console.log(utils);
     };
 
     useEffect(() => {
         removeState();
-        if (utils.token && utils.token.Organization == "ManufacturerOrg") {
+        if (utils.token && utils.token.Organization === "SupplierOrg") {
+            navigate('/supplier-management')
+        }
+        if (utils.token && utils.token.Organization === "ManufacturerOrg") {
             navigate('/product-management')
         }
-        if (utils.token && utils.token.Organization == "DistributorOrg") {
+        if (utils.token && utils.token.Organization === "CarrierOrg") {
             navigate('/product-confirmation')
         }
-        if (utils.token && utils.token.Organization == "RetailerOrg") {
+        if (utils.token && utils.token.Organization === "RetailerOrg") {
             navigate('/saler-confirmation')
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [utils.token])
 
     const removeState = () => {

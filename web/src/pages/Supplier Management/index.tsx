@@ -27,7 +27,7 @@ interface positionItemProps {
   Latitude: number
 }
 
-const ProductManagement: React.FC = () => {
+const SupplierManagement: React.FC = () => {
   const [form1] = Form.useForm();
   const [form2] = Form.useForm();
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const ProductManagement: React.FC = () => {
 
 
   const queryAllProduct = () => {
-    fetch(`http://localhost:3001/query?channelid=mychannel&chaincodeid=supplychain&function=queryAllProducts`, {
+    fetch(`http://localhost:3000/query?channelid=mychannel&chaincodeid=supplychain&function=queryAllProducts`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -85,7 +85,7 @@ const ProductManagement: React.FC = () => {
       .validateFields()
       .then((values) => {
         form1.resetFields();
-        fetch(`http://localhost:3001/invoke?channelid=mychannel&chaincodeid=supplychain&function=updateProduct&args=${values.productId}&args=${values.name}&args=${values.price}`, {
+        fetch(`http://localhost:3000/invoke?channelid=mychannel&chaincodeid=supplychain&function=updateProduct&args=${values.productId}&args=${values.name}&args=${values.price}`, {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -111,7 +111,7 @@ const ProductManagement: React.FC = () => {
       .validateFields()
       .then((values) => {
         form2.resetFields();
-        fetch(`http://localhost:3001/invoke?channelid=mychannel&chaincodeid=supplychain&function=createProduct&args=${values.name}&args=${values.manufacturer}&args=${values.longtitude}&args=${values.latitude}&args=${values.price}`, {
+        fetch(`http://localhost:3000/invoke?channelid=mychannel&chaincodeid=supplychain&function=createProduct&args=${values.name}&args=${values.manufacturer}&args=${values.longtitude}&args=${values.latitude}&args=${values.price}`, {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -139,7 +139,7 @@ const ProductManagement: React.FC = () => {
   }
 
   useEffect(() => {
-    if (!utils.token || utils.token.Organization != "ManufacturerOrg") {
+    if (!utils.token || utils.token.Organization !== "SupplierOrg") {
       navigate("/login")
     } else {
       queryAllProduct();
@@ -150,7 +150,7 @@ const ProductManagement: React.FC = () => {
     <Layout className="layout">
       <PageHeader />
       <Content className="site-layout" style={{ padding: '0 50px' }}>
-        <h1>PRODUCT MANAGEMENT</h1>
+        <h1>SUPPLIER MANAGEMENT</h1>
         {
           err ? <p style={{ color: 'red' }}> Cannot get data from server!</p> : null
         }
@@ -247,4 +247,4 @@ const ProductManagement: React.FC = () => {
   )
 }
 
-export default ProductManagement;
+export default SupplierManagement;

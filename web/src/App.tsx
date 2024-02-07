@@ -29,7 +29,9 @@ const App: React.FC<Props> = ({children}) => {
     const [err, setErr] = useState(false);
 
     const handleLogin = (username: any, password: any) => {
-        fetch(`http://localhost:3000/query?channelid=supplychain&chaincodeid=supplychain&function=signIn&args=${username}&args=${password}`, {
+        console.log(username);
+        
+        fetch(`http://localhost:3004/query?channelid=mychannel&chaincodeid=supplychain&function=signIn&args=${username}&args=${password}`, {
             method: 'GET',
             mode: 'cors',
             headers: {

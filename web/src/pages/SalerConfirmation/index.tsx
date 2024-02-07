@@ -41,7 +41,7 @@ const SalerConfirmation: React.FC = () => {
 
 
   const queryAllProduct = () => {
-    fetch(`https://retailer.ducnghiapham.online/query?channelid=supplychain&chaincodeid=supplychain&function=queryAllProducts`, {
+    fetch(`http://localhost:3003/query?channelid=mychannel&chaincodeid=supplychain&function=queryAllProducts`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -84,7 +84,7 @@ const SalerConfirmation: React.FC = () => {
       .validateFields()
       .then((values) => {
         form.resetFields();
-        fetch(`https://retailer.ducnghiapham.online/invoke?channelid=supplychain&chaincodeid=supplychain&function=sentToRetailer&args=${values.productId}&args=${values.retailerId}&args=${values.longtitude}&args=${values.latitude}`, {
+        fetch(`http://localhost:3003/invoke?channelid=mychannel&chaincodeid=supplychain&function=sentToRetailer&args=${values.productId}&args=${values.retailerId}&args=${values.longtitude}&args=${values.latitude}`, {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -113,7 +113,7 @@ const SalerConfirmation: React.FC = () => {
         if (values.retailerId !== (productResponse.find((item) => { return item.ProductId === values.productId }))?.Retailer) {
           setErr("Can not update product!")
         } else {
-          fetch(`https://retailer.ducnghiapham.online/invoke?channelid=supplychain&chaincodeid=supplychain&function=sellToConsumer&args=${values.productId}&args=${values.customerId}&args=${values.longtitude}&args=${values.latitude}`, {
+          fetch(`http://localhost:3003/invoke?channelid=mychannel&chaincodeid=supplychain&function=sellToConsumer&args=${values.productId}&args=${values.customerId}&args=${values.longtitude}&args=${values.latitude}`, {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -260,7 +260,7 @@ const SalerConfirmation: React.FC = () => {
           </Form>
         </Modal>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>SupChain ©2023 Created by DucNghiaPham</Footer>
+      <Footer style={{ textAlign: 'center' }}>SupplyChain ©2024 Created by Rifkhan</Footer>
     </Layout>
   )
 }

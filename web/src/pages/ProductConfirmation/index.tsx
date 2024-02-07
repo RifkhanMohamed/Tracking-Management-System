@@ -39,7 +39,7 @@ const DeliverConfirmation: React.FC = () => {
 
 
   const queryAllProduct = () => {
-    fetch(`https://distributor.ducnghiapham.online/query?channelid=supplychain&chaincodeid=supplychain&function=queryAllProducts`, {
+    fetch(`http://localhost:3002/query?channelid=mychannel&chaincodeid=supplychain&function=queryAllProducts`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -76,7 +76,7 @@ const DeliverConfirmation: React.FC = () => {
       .validateFields()
       .then((values) => {
         form.resetFields();
-        fetch(`https://distributor.ducnghiapham.online/invoke?channelid=supplychain&chaincodeid=supplychain&function=sentToDistributor&args=${values.productId}&args=${values.distributorId}&args=${values.longtitude}&args=${values.latitude}`, {
+        fetch(`http://localhost:3002/invoke?channelid=mychannel&chaincodeid=supplychain&function=sentToDistributor&args=${values.productId}&args=${values.distributorId}&args=${values.longtitude}&args=${values.latitude}`, {
           method: 'POST',
           mode: 'cors',
           headers: {
@@ -168,7 +168,7 @@ const DeliverConfirmation: React.FC = () => {
           </Form>
         </Modal>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>SupChain ©2023 Created by DucNghiaPham</Footer>
+      <Footer style={{ textAlign: 'center' }}>SupplyChain ©2024 Created by Rifkhan</Footer>
     </Layout>
   )
 }
