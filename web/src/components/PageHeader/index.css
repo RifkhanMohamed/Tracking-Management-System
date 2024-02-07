@@ -1,0 +1,11 @@
+.user-view:hover{
+    background: #F5F5F5;
+    color: #001529;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+}
+.user-view{
+    color: #F5F5F5;
+
+}
