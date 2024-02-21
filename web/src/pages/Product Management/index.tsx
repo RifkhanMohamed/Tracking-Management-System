@@ -64,7 +64,7 @@ const ProductManagement: React.FC = () => {
     { title: 'Retailer', dataIndex: 'Retailer', key: 'Retailer' },
     { title: 'Customer', dataIndex: 'Consumer', key: 'Consumer' },
     { title: 'Status', dataIndex: 'Status', key: 'Status' },
-    { title: 'Price', dataIndex: 'Price', key: 'Price' },
+    { title: 'Price', dataIndex: 'Price', key: 'Price' }
   ];
 
 

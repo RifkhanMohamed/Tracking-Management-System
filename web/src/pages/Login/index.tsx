@@ -38,7 +38,7 @@ const Login: React.FC = () => {
 
     return (
         <div className='login-view'>
-            <img src={Logo} alt="" />
+            <img src={Logo} alt="" style={{ maxWidth: 300 }} />
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}

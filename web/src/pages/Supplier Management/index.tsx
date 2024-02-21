@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ColumnsType } from 'antd/es/table';
 import { AuthContext } from '../../App';
 import PageHeader from '../../components/PageHeader';
+import QRCode from 'qrcode.react'; 
 
 const { Content, Footer } = Layout;
 
@@ -75,6 +76,13 @@ const SupplierManagement: React.FC = () => {
         // }
       }
     },
+    { title: 'QR', dataIndex: 'QR',       key: 'QR',
+    render: (_, record) => (
+      <QRCode
+        value={record.ProductId} // Use the relevant data for QR code
+        size={64} // Adjust the size as needed
+      />
+    )}
   ];
 
   const addBtnHandler = () => {

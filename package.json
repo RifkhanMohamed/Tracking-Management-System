@@ -2,6 +2,7 @@
   "dependencies": {
     "@hyperledger/caliper-core": "^0.5.0",
     "fabric-ca-client": "^2.2.3",
-    "fabric-network": "^2.2.3"
+    "fabric-network": "^2.2.3",
+    "react-qr-code": "^2.0.12"
   }
 }

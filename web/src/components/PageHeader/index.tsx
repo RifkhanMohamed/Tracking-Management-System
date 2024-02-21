@@ -44,7 +44,7 @@ const PageHeader = () => {
     }
 
     return (
-        <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
+        <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%', backgroundColor: 'deepskyblue' }}>
             <div>
                 <img src={Logo} alt=""
                     onClick={() => navigate("/")}
