@@ -2,7 +2,7 @@ import { Button, Form, Input } from 'antd';
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App';
-import Logo from '../../assets/logo.jpg'
+import Logo from '../../assets/logo.png'
 import './index.css'
 
 

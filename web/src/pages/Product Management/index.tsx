@@ -78,7 +78,7 @@ const ProductManagement: React.FC = () => {
       .validateFields()
       .then((values) => {
         form.resetFields();
-        fetch(`http://localhost:3001/invoke?channelid=mychannel&chaincodeid=supplychain&function=SentToManufacturer&args=${values.productId}&args=${values.distributorId}&args=${values.longtitude}&args=${values.latitude}`, {
+        fetch(`http://localhost:3001/invoke?channelid=mychannel&chaincodeid=supplychain&function=SentToManufacturer&args=${values.productId}&args=${values.manufacturerId}&args=${values.longtitude}&args=${values.latitude}`, {
           method: 'POST',
           mode: 'cors',
           headers: {

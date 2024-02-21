@@ -1,6 +1,6 @@
 ﻿import { useContext } from 'react';
 import { Layout, Button, Avatar, Dropdown, MenuProps } from 'antd';
-import Logo from '../../assets/logo2.jpg'
+import Logo from '../../assets/logo2.png'
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../../App';

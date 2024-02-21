@@ -11,6 +11,7 @@ const { Content, Footer } = Layout;
 interface productResponseItemProps {
   ProductId: string,
   Name: string,
+  Supplier: string,
   Manufacturer: string,
   Distributor: string,
   Retailer: string,
@@ -69,9 +70,9 @@ const SupplierManagement: React.FC = () => {
     { title: 'Price', dataIndex: 'Price', key: 'Price' },
     {
       title: 'Action', key: 'Operation', render: (_, product) => {
-        if (!product.Distributor && !product.Manufacturer) {
+        // if (!product.Distributor && !product.Manufacturer) {
           return <a onClick={() => actionOnClickHandler(product)}>Edit</a>
-        }
+        // }
       }
     },
   ];

@@ -49,7 +49,7 @@ const DeliverConfirmation: React.FC = () => {
     })
       .then(respose => respose.json())
       .then(data => data.filter((item: any) => {
-        return item.Distributor === "GiaoHangTietKiem"
+        return item.Distributor === "Mohamed"
       }))
       .then(products => setProductResponse(products))
       .catch(() => setErr(true))
@@ -134,7 +134,7 @@ const DeliverConfirmation: React.FC = () => {
             form={form}
             layout="vertical"
             name="form_in_modal"
-            initialValues={{ distributorId: "GiaoHangTietKiem", longtitude: 11.841790, latitude: 107.633600 }}
+            initialValues={{ distributorId: "Mohamed", longtitude: 11.841790, latitude: 107.633600 }}
           >
             <Form.Item
               name="productId"
