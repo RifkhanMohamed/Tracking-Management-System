@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Input, Timeline } from 'antd';
 import "./index.css"
 import PageHeader from '../../components/PageHeader';
+import { Html5QrcodeScanType, Html5QrcodeScanner} from "html5-qrcode";
 
 const { Content, Footer } = Layout;
 const { Search } = Input;
@@ -30,6 +31,7 @@ const Home: React.FC = () => {
   const [productResponse, setProductResponse] = useState<productResponseItemProps | null>();
   const [err, setErr] = useState('');
   const [item, setItem] = useState<any>([]);
+  const [scanResult, setScanResult] = useState(null);
 
   const queryProduct = (productId: string) => {
     setProductResponse(null)
@@ -90,12 +92,64 @@ const Home: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    const config = {
+      fps: 10,
+      qrbox: { width: 500, height: 500 },
+      rememberLastUsedCamera: true,
+      // Only support camera scan type.
+      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA]
+    };
+
+    const scanner = new Html5QrcodeScanner("reader", config, /* verbose= */ true);
+
+    // Explicitly check if the element with id "reader" exists
+    const containerElement = document.getElementById("reader");
+
+    if (containerElement) {
+      // Now check if video elements exist inside the container
+      const videoElements = containerElement.getElementsByTagName("video");
+
+      if (videoElements.length > 0) {
+        const videoElement = videoElements[0];
+
+        // Apply styles to the video element
+        videoElement.style.cssText = "height: 500px;";// Adjust the height as needed
+      } else {
+        console.error("No video elements found inside the container");
+      }
+    } else {
+      console.error("Container element with id 'reader' not found");
+    }
+
+    scanner.render(success, error);
+
+    function success(result: any) {
+      scanner.clear();
+      setScanResult(result);
+      // Trigger the search with the scanned result
+      if (result) {
+        queryProduct(result);
+      }
+    }
+
+    function error(err: any) {
+      console.warn(err);
+    }
+
+    return () => {
+      scanner.clear();
+    };
+  }, []);
+
+
   return (
     <Layout className="layout">
       <PageHeader />
       <Content className="site-layout" style={{ padding: '0 50px' }}>
         <h1>Product tracking</h1>
         <Search placeholder="Product Code" enterButton="Search" size="large" onSearch={queryProduct}></Search>
+         <div id='reader'></div>
         {productResponse ?
           (
             <>
